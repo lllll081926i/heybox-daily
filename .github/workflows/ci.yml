@@ -13,6 +13,11 @@ jobs:
       - run: npm install --global pnpm@12.15.0
       - run: pnpm install --frozen-lockfile --ignore-scripts
       - run: pnpm test
+      - name: Test QingLong script-only entrypoint (offline)
+        run: |
+          node --check qinglong/heybox_daily.mjs
+          sh -n qinglong/heybox_daily.sh
+          node --test qinglong/*.test.mjs
       - run: pnpm --filter @heybox/login-relay typecheck
       - run: pnpm --filter @heybox/login-relay test
       - run: pnpm --filter @heybox/login-relay test:runtime
